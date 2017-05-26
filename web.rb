@@ -1,5 +1,9 @@
 require 'sinatra'
 require 'sequel'
+require 'sinatra/respond_with'
+require 'json'
+
+
 DB = Sequel.connect( 'postgres://localhost/troll')
 module RandomEntry
   def rand
@@ -25,20 +29,41 @@ end
 
 post '/adjective' do
   adj = params[:adjective]
-  adjectives.insert(adjective: adj)
-  "success"
+  begin 
+    adjectives.insert(adjective: adj)
+    "success"
+  rescue Sequel::UniqueConstraintViolation => e
+    "failure"
+  end
 end
 
 post '/animal' do
   animal = params[:animal]
-  animals.insert(animal: animal)
-  "success"
+  begin
+    animals.insert(animal: animal)
+    "success"
+  rescue Sequel::UniqueConstraintViolation => e
+    "failure"
+  end
 end
 
 post '/noun' do
   noun = params[:noun]
-  nouns.insert(noun: noun)
-  "success"
+  begin
+    nouns.insert(noun: noun)
+    "success"
+  rescue Sequel::UniqueConstraintViolation => e
+    "failure"
+    end
 end
 
+get '/dbdump' do
+  @DB = DB
+  erb :dbdump
+end
+
+get '/db.json' do
+  content_type :json
+  {adjectives: adjectives.map(:adjective), animals: animals.map(:animal), nouns: nouns.map(:noun)}.to_json
+end
 

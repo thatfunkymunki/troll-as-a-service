@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title> db dump </title>
+  </head>
+  <body>
+    <%#  dump adjectives table %>
+    <h1>adjectives</h1>
+    <pre>
+      <% @DB[:adjectives].map(:adjective).each do |adj| %>
+        <%=adj%>
+      <% end %>
+    </pre>
+    <br>
+    <h1>animals</h1>
+    <pre>
+      <% @DB[:animals].map(:animal).each do |animal| %>
+        <%=animal%>
+      <%end%>
+    </pre>
+    <br>
+    <h1>nouns</h1>
+    <pre>
+      <% @DB[:nouns].map(:noun).each do |noun| %>
+        <%=noun%>
+      <%end%>
+    </pre>
+  </body>
+</html>
