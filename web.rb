@@ -15,8 +15,18 @@ adjectives = DB[:adjectives]
 animals = DB[:animals]
 nouns = DB[:nouns]
 
-set (:synthtech) do
+def synthtech? 
   @env['REMOTE_ADDR'].to_s =~ '51.254.34.203'
+end
+
+set (:synthtech) do
+  condition do
+    if !synthtech?
+      false
+    else
+      true
+    end
+  end
 end
 
 get '/troll' do
