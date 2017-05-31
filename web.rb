@@ -4,7 +4,7 @@ require 'sinatra/respond_with'
 require 'json'
 
 
-DB = Sequel.connect( 'postgres://localhost/troll')
+DB = Sequel.connect( ENV['DATABASE_URL'] || 'postgres://localhost/munki')
 module RandomEntry
   def rand
     self.order(Sequel.lit('random()')).first
