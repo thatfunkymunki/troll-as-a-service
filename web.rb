@@ -16,7 +16,7 @@ animals = DB[:animals]
 nouns = DB[:nouns]
 
 def synthtech? 
-  @env['REMOTE_ADDR'].to_s =~ '51.254.34.203'
+  @env['REMOTE_ADDR'].to_s =~ /51.254.34.203/
 end
 
 set :synthtech do |value|
