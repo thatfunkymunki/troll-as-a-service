@@ -32,7 +32,7 @@ end
 
 get '/troll' do
   num = params[:num].to_i || 1
-  colors = 2.times.map{Random.rand(15)}
+  colors = (0..15).to_a.sample 2
 #  troll = sprintf("\x03%i,%i",colors[0],colors[1]).force_encoding('ASCII-8BIT')
   troll = "\x03#{colors[0]},#{colors[1]}"
   0.upto(num) do
