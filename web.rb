@@ -19,7 +19,7 @@ def synthtech?
   @env['REMOTE_ADDR'].to_s =~ '51.254.34.203'
 end
 
-set (:synthtech) do
+set :synthtech do |value|
   condition do
     if !synthtech?
       false
