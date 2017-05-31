@@ -44,7 +44,7 @@ end
 post '/adjective', synthtech: true do
   adj = params[:adjective]
   begin 
-    adjectives.insert(adjective: adj)
+    adjectives.insert(adjective: adj.to_s.downcase)
     "success"
   rescue Sequel::UniqueConstraintViolation => e
     "failure"
@@ -54,7 +54,7 @@ end
 post '/animal' , synthtech: true do
   animal = params[:animal]
   begin
-    animals.insert(animal: animal)
+    animals.insert(animal: animal.to_s.downcase)
     "success"
   rescue Sequel::UniqueConstraintViolation => e
     "failure"
@@ -64,7 +64,7 @@ end
 post '/noun' , synthtech: true do
   noun = params[:noun]
   begin
-    nouns.insert(noun: noun)
+    nouns.insert(noun: noun.to_s.downcase)
     "success"
   rescue Sequel::UniqueConstraintViolation => e
     "failure"
