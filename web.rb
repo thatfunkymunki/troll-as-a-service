@@ -15,6 +15,9 @@ adjectives = DB[:adjectives]
 animals = DB[:animals]
 nouns = DB[:nouns]
 
+set (:synthtech) do
+  @env['REMOTE_ADDR'].to_s =~ '51.254.34.203'
+end
 
 get '/troll' do
   num = params[:num].to_i || 1
@@ -27,7 +30,7 @@ get '/troll' do
   troll
 end
 
-post '/adjective' do
+post '/adjective', synthtech: true do
   adj = params[:adjective]
   begin 
     adjectives.insert(adjective: adj)
@@ -37,7 +40,7 @@ post '/adjective' do
   end
 end
 
-post '/animal' do
+post '/animal' , synthtech: true do
   animal = params[:animal]
   begin
     animals.insert(animal: animal)
@@ -47,7 +50,7 @@ post '/animal' do
   end
 end
 
-post '/noun' do
+post '/noun' , synthtech: true do
   noun = params[:noun]
   begin
     nouns.insert(noun: noun)
