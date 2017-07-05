@@ -15,21 +15,6 @@ adjectives = DB[:adjectives]
 animals = DB[:animals]
 nouns = DB[:nouns]
 
-def synthtech? 
-  puts @env['REMOTE_ADDR'].to_s
-  @env['REMOTE_ADDR'].to_s =~ /51.254.34.203/
-end
-
-set :synthtech do |value|
-  condition do
-    if !synthtech?
-      false
-    else
-      true
-    end
-  end
-end
-
 get '/troll' do
   num = params[:num].to_i || 1
   colors = (0..15).to_a.sample 2
@@ -41,7 +26,7 @@ get '/troll' do
   troll
 end
 
-post '/adjective', synthtech: true do
+post '/adjective' do
   adj = params[:adjective]
   begin 
     adjectives.insert(adjective: adj.to_s.downcase)
@@ -51,7 +36,7 @@ post '/adjective', synthtech: true do
   end
 end
 
-post '/animal' , synthtech: true do
+post '/animal' do
   animal = params[:animal]
   begin
     animals.insert(animal: animal.to_s.downcase)
@@ -61,7 +46,7 @@ post '/animal' , synthtech: true do
   end
 end
 
-post '/noun' , synthtech: true do
+post '/noun' do
   noun = params[:noun]
   begin
     nouns.insert(noun: noun.to_s.downcase)
