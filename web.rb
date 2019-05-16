@@ -23,7 +23,7 @@ get '/troll' do
   0.upto(num) do
     troll << "#{adjectives.rand[:adjective]} #{animals.rand[:animal]} #{nouns.rand[:noun]}\x16"
   end
-  troll.downcase if params[:downcase] else troll.upcase
+  params[:downcase] == "true" ? troll.downcase : troll.upcase
 end
 
 post '/adjective' do
