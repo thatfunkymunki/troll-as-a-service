@@ -21,9 +21,9 @@ get '/troll' do
 #  troll = sprintf("\x03%i,%i",colors[0],colors[1]).force_encoding('ASCII-8BIT')
   troll = "\x03#{colors[0]},#{colors[1]}"
   0.upto(num) do
-    troll << "#{adjectives.rand[:adjective]} #{animals.rand[:animal]} #{nouns.rand[:noun]}\x16".upcase
+    troll << "#{adjectives.rand[:adjective]} #{animals.rand[:animal]} #{nouns.rand[:noun]}\x16"
   end
-  troll
+  troll.downcase if params[:downcase] else troll.upcase
 end
 
 post '/adjective' do
