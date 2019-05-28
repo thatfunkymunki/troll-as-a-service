@@ -24,7 +24,7 @@ get '/troll' do
   0.upto(num) do
     #troll << "#{adjectives.rand[:adjective]} #{animals.rand[:animal]} #{nouns.rand[:noun]}\x16"
     
-    phrases.push(params[:space] == "true" ? " " : "", "#{adjectives.rand[:adjective]} #{animals.rand[:animal]} #{nouns.rand[:noun]}\x16")
+    phrases.push("#{adjectives.rand[:adjective]} #{animals.rand[:animal]} #{nouns.rand[:noun]}" + (params[:space] == "true" ? " " : "") +"\x16")
   end
   troll += phrases.join(params[:space] == "true" ? " " : "")
   params[:downcase] == "true" ? troll.downcase : troll.upcase
