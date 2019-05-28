@@ -20,9 +20,13 @@ get '/troll' do
   colors = (0..15).to_a.sample 2
 #  troll = sprintf("\x03%i,%i",colors[0],colors[1]).force_encoding('ASCII-8BIT')
   troll = "\x03#{colors[0]},#{colors[1]}"
+  phrases = []
   0.upto(num) do
-    troll << "#{adjectives.rand[:adjective]} #{animals.rand[:animal]} #{nouns.rand[:noun]}\x16"
+    #troll << "#{adjectives.rand[:adjective]} #{animals.rand[:animal]} #{nouns.rand[:noun]}\x16"
+    
+    phrases.push(params[:space] == "true" ? " " : "", "#{adjectives.rand[:adjective]} #{animals.rand[:animal]} #{nouns.rand[:noun]}\x16")
   end
+  troll += phrases.join(params[:space] == "true" ? " " : "")
   params[:downcase] == "true" ? troll.downcase : troll.upcase
 end
 
